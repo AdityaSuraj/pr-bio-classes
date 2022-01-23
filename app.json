@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "cybolearn",
-    "slug": "cybolearn",
+    "name": "PR Bio Classes",
+    "slug": "pr_bio_classes",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/applogo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/prlogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,9 +21,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/applogo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "MEDIA_LIBRARY"
+      ],
+      "package": "com.prbiology.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

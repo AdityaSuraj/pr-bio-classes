@@ -4,7 +4,7 @@ import {useNavigation,useRoute} from '@react-navigation/native';
 import { customRequest } from '../../functions/request';
 import Header from '../../components/header';
 import { colorPrimary } from '../../constants/colors';
-import { width } from '../../constants/dimensions';
+import { width ,height} from '../../constants/dimensions';
 
 const StudentClassVideoScreen = ()=>{
     const navigation = useNavigation();
@@ -14,12 +14,13 @@ const StudentClassVideoScreen = ()=>{
 
     React.useEffect(()=>{
         // console.log(route.params.course);
-        customRequest('videos',{'course':route.params.course}).then((res)=>{
+        customRequest('videos',{'course':route.params.course == null ? "free" :route.params.course}).then((res)=>{
             setLoading(false);
             if(res['videos'].length === 0 ){
                 setCourses(
-                    <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
-                        <Text>Currently no any {'\n'}vidoes available</Text>
+                    <View style={{height:height - 114,width:width - 24,overflow:"hidden",backgroundColor:"white",alignItems:"center",justifyContent:"center"}}>
+                        <Image source={require('../../assets/online_video.png')} style={{resizeMode:"contain",height:width - 60 , width:width }}/>
+                        <Text style={{fontWeight:"bold",fontSize:16,textAlign:"center",color:colorPrimary}}>Currently no any videos{'\n'}for you.</Text>
                     </View>
                 )
             }else{

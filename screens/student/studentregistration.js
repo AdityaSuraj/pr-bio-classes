@@ -11,6 +11,7 @@ const StudentRegistrationScreen = ()=>{
     const navigation = useNavigation();
     let [name,setName] = React.useState('');
     let [email,setEmail] = React.useState('');
+    let [phone,setPhone] = React.useState('');
     let [password,setPassword] = React.useState('');
     let [isLoading,setIsLoading] = React.useState(false);
 
@@ -35,7 +36,7 @@ const StudentRegistrationScreen = ()=>{
                 'Accept':'application/json',
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify({'email':email,'password':password,'name':name})})
+            body:JSON.stringify({'email':email,'password':password,'name':name,'phone':phone})})
             .then(response => response.json())
             .then((json)=>{
                 console.log(json);
@@ -64,6 +65,10 @@ const StudentRegistrationScreen = ()=>{
                 <View style={{borderRadius:5,borderWidth:1,borderColor:"gray",width:width-94,paddingHorizontal:12,paddingVertical:8,marginVertical:8,flexDirection:"row",alignItems:"center"}}>
                     <Icon name="email" size={18}/>
                     <TextInput placeholder="Email" style={{fontSize:16,marginLeft:12,flex:1}} onChangeText={(text)=>{setEmail(text);}} keyboardType="email-address"/>
+                </View>
+                <View style={{borderRadius:5,borderWidth:1,borderColor:"gray",width:width-94,paddingHorizontal:12,paddingVertical:8,marginVertical:8,flexDirection:"row",alignItems:"center"}}>
+                    <Icon name="phone" size={18}/>
+                    <TextInput maxLength={10} placeholder="Phone Number" style={{fontSize:16,marginLeft:12,flex:1}} onChangeText={(text)=>{setPhone(text);}} keyboardType="phone-pad"/>
                 </View>
                 <View style={{borderRadius:5,borderWidth:1,borderColor:"gray",width:width-94,paddingHorizontal:12,paddingVertical:8,marginVertical:8,flexDirection:"row",alignItems:"center"}}>
                     <Icon name="key" size={18}/>

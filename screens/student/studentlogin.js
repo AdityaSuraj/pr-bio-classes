@@ -27,8 +27,6 @@ const StudentLoginScreen = ()=>{
     function handlePhoneRegistration(){
         if(email.length === 0){
             alert("Please Enter Valid Email Id!")
-        }else if(email.split('@').length === 1){
-            alert('Invalid Email Id!!!')
         }else{
             setIsLoading(true);
             fetch(`${rootlink}/login`,{method:"POST",
@@ -43,6 +41,7 @@ const StudentLoginScreen = ()=>{
                 if(json['message'] === "success"){
                     saveInStorage('studentname',json['name']);
                     saveInStorage('studenttoken',json['token']);
+                    saveInStorage('studentdetail',JSON.stringify(json['user']));
                     navigation.replace('TabNavigation')
                 }else{
                     alert(json['message']);
@@ -59,8 +58,8 @@ const StudentLoginScreen = ()=>{
                 <Text style={{fontSize:20,fontWeight:"bold"}}>Student Login</Text>
                
                 <View style={{borderRadius:5,borderWidth:1,borderColor:"gray",width:width-94,paddingHorizontal:12,paddingVertical:8,marginVertical:8,flexDirection:"row",alignItems:"center"}}>
-                    <Icon name="email" size={18}/>
-                    <TextInput placeholder="Email" style={{fontSize:16,marginLeft:12,flex:1}} onChangeText={(text)=>{setEmail(text);}} keyboardType="email-address"/>
+                    <Icon name="person" size={18}/>
+                    <TextInput placeholder="Email id/Phone Number" style={{fontSize:16,marginLeft:12,flex:1}} onChangeText={(text)=>{setEmail(text);}} keyboardType="email-address"/>
                 </View>
                 <View style={{borderRadius:5,borderWidth:1,borderColor:"gray",width:width-94,paddingHorizontal:12,paddingVertical:8,marginVertical:8,flexDirection:"row",alignItems:"center"}}>
                     <Icon name="key" size={18}/>

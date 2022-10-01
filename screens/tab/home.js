@@ -197,8 +197,8 @@ const HomeScreen = ()=>{
                         return (
                             <View key={pdf['id']} id={pdf['id']} style={{alignItems:"center",padding:8,width:160,borderRadius:10,overflow:"hidden",backgroundColor:"white",marginRight:10}}>
                                 <Icon name="acrobat-reader" size={64}/>
-                                <Text>{pdf['title']}</Text>
-                                <TouchableOpacity activeOpacity={0.8} onPress={()=>{navigation.navigate('ViewPDFScreen',{title:pdf['title'],path:pdf['files']})}}>
+                                <Text style={{textAlign:"center"}}>{pdf['title']}</Text>
+                                <TouchableOpacity style={{marginTop:"auto"}} activeOpacity={0.8} onPress={()=>{navigation.navigate('ViewPDFScreen',{title:pdf['title'],path:pdf['files']})}}>
                                     <View style={{width:160 - 16,marginTop:8,backgroundColor:colorPrimary,borderRadius:5,paddingVertical:4,justifyContent:"center",alignItems:"center"}}><Text style={{color:"white",fontWeight:"bold"}}>Read Now</Text></View>
                                 </TouchableOpacity>
                             </View>
@@ -218,7 +218,7 @@ const HomeScreen = ()=>{
                 setVideos(
                     res['videos'].map((video)=>{
                        return (
-                            <TouchableOpacity activeOpacity={0.8} key={video['video_id']} style={{marginRight:10}} onPress={()=>{navigation.navigate('WatchVideoScreen',{videolink:video['video_id'],id:video['id']})}}>
+                            <TouchableOpacity activeOpacity={0.8} key={video['id']} style={{marginRight:10}} onPress={()=>{navigation.navigate('WatchVideoScreen',{videolink:video['video_id'],id:video['id']})}}>
                                 <View  style={{minHeight:210,width:(width-12)/2 - 3,borderRadius:5,overflow:"hidden",marginVertical:4,backgroundColor:"white"}}>
                                     <Image source={{uri:video['video_link']}} style={{height:120,width:(width-12)/2 - 3,resizeMode:"cover"}}/>
                                     <View style={{padding:8,justifyContent:"space-between",height: 90}}>

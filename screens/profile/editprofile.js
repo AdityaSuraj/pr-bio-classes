@@ -14,12 +14,19 @@ function EditProfileScreen (){
     let [img,setImg] = React.useState(null);
     let [password,setPassword] = React.useState('');
     let [confirmPassword,setConfirmPassword] = React.useState('');
-    let [pin,setPin] = React.useState(null);
+    let [phone,setPhone] = React.useState('');
     const [modalVisible, setModalVisible] = React.useState(false);
 
     React.useEffect(()=>{
         getPlainValueFromStorage('studentname').then((res)=>{
             setUsername(res);
+        })
+        getValueFromStorage('studentdetail').then((res)=>{
+            if(res !== null){
+                if(res.phone !== null){
+                    setPhone(res.phone);
+                }
+            }
         })
     },[])
 
@@ -39,6 +46,7 @@ function EditProfileScreen (){
             let formData = new FormData();
             // formData.append('img',{name:img.uri.toString().split('/')[img.uri.toString().split('/').length - 1],uri:img.uri,type:'image/jpg'});
             formData.append('password',password);
+            formData.append('phone',phone);
             customRequestMultipart('updateprofile',formData).then((res)=>{
                 setModalVisible(false);
                 // saveInStorage('studentdetail',JSON.stringify(res['data']))
@@ -80,7 +88,11 @@ return (
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{flex:1,paddingVertical:16,paddingHorizontal:16}}>
+                    <Text style={{marginBottom:4,marginLeft:4}}>Phone Number</Text>
                     <View style={{backgroundColor:"white",paddingVertical:8,paddingHorizontal:16,borderRadius:5}}>
+                        <TextInput value={phone} placeholder="Phone Number" onChangeText={(txt)=>{setPhone(txt)}}/>
+                    </View>
+                    <View style={{backgroundColor:"white",paddingVertical:8,paddingHorizontal:16,borderRadius:5,marginTop:8}}>
                         <TextInput placeholder="New Password" secureTextEntry={true} onChangeText={(txt)=>{setPassword(txt)}}/>
                     </View>
                     <View style={{backgroundColor:"white",paddingVertical:8,paddingHorizontal:16,borderRadius:5,marginTop:8}}>
@@ -104,7 +116,7 @@ return (
             </ScrollView>
             <TouchableOpacity onPress={handleSaveDate}>
                 <View style={{backgroundColor:colorPrimary,paddingHorizontal:16,paddingVertical:12,justifyContent:"center",alignItems:"center"}}>
-                    <Text style={{fontSize:22,color:'white'}}>Update Password</Text>
+                    <Text style={{fontSize:22,color:'white'}}>Update</Text>
                 </View>
             </TouchableOpacity>
         </View>
